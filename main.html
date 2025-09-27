@@ -1,42 +1,40 @@
-
-
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Display Current Time (12-Hour Format)</title>
+  <meta charset="UTF-8" />
+  <title>Simple Date & Time</title>
 </head>
-
 <body>
-    <h2>Current Date and Time:</h2>
-	<div style="display:flex; align-items:center";    >  <p id='newdate'></p>   <p id="date" style="margin-left: 20px;"></p></div>
+  <h2>Current Date and Time:</h2>
+  <p id="datetime"></p>
 
+  <script>
+    function updateDateTime() {
+      const now = new Date();
 
-    <script>
+      // Format date as MM/DD/YYYY
+      const month = now.getMonth() + 1; // getMonth() is zero-based
+      const day = now.getDate();
+      const year = now.getFullYear();
 
-		let newdate = new Date();
-         let data = newdate.getDate()
-         let m = newdate.getMonth()
-         let year = newdate.getFullYear()
-        document.getElementById("newdate").innerText=`${m}/ ${data}/${year}`
-       
-        setInterval(() => {
-            let date = new Date();
+      // Format time in 12-hour format with leading zeros
+      let hours = now.getHours();
+      const minutes = now.getMinutes();
+      const seconds = now.getSeconds();
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12 || 12;
 
-            // Helper function to add leading zero
-            let pad = (n) => n.toString().padStart(2, '0');
+      const pad = (num) => (num < 10 ? '0' + num : num);
 
-            // Inline conversion to 12-hour format
-            let hoursRaw = date.getHours();
-            let ampm = hoursRaw >= 12 ? 'PM' : 'AM';
-            let hours = hoursRaw % 12 || 12;
+      const formattedDate = `${pad(month)}/${pad(day)}/${year}`;
+      const formattedTime = `${pad(hours)}:${pad(minutes)}:${pad(seconds)} ${ampm}`;
 
-            let time = `${pad(hours)}:${pad(date.getMinutes())}:${pad(date.getSeconds())} ${ampm}`;
+      document.getElementById('datetime').innerText = `${formattedDate}, ${formattedTime}`;
+    }
 
-            document.getElementById('date').innerText = time;
-        }, 1000);
-    </script>
-
+    setInterval(updateDateTime, 1000);
+    updateDateTime(); // initial call to show time immediately
+  </script>
 </body>
-
 </html>
+
