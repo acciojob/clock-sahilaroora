@@ -1,15 +1,33 @@
-<!DOCTYPE html>
 
+
+<!DOCTYPE html>
 <html>
 
 <head>
-	<link rel="stylesheet" href="styles.css">
+    <title>Display Current Time (12-Hour Format)</title>
 </head>
 
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+    <h2>Current Date and Time:</h2>
+    <p id="date" style="font-size: 24px; font-family: monospace;"></p>
+
+    <script>
+        setInterval(() => {
+            let date = new Date();
+
+            // Helper function to add leading zero
+            let pad = (n) => n.toString().padStart(2, '0');
+
+            // Inline conversion to 12-hour format
+            let hoursRaw = date.getHours();
+            let ampm = hoursRaw >= 12 ? 'PM' : 'AM';
+            let hours = hoursRaw % 12 || 12;
+
+            let time = `${pad(hours)}:${pad(date.getMinutes())}:${pad(date.getSeconds())} ${ampm}`;
+
+            document.getElementById('date').innerText = time;
+        }, 1000);
+    </script>
 
 </body>
 
