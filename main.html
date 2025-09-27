@@ -9,9 +9,17 @@
 
 <body>
     <h2>Current Date and Time:</h2>
-    <p id="date" style="font-size: 24px; font-family: monospace;"></p>
+	<div style="display:flex; align-items:center";gap:20px; >  <p id='newdate'></p>   <p id="date" style="font-size: 24px; font-family: monospace;"></p></div>
+
 
     <script>
+
+		let newdate = new Date();
+         let data = newdate.getDate()
+         let m = newdate.getMonth()
+         let year = newdate.getFullYear()
+        document.getElementById("newdate").innerText=`${m}/ ${data}/${year}`
+       
         setInterval(() => {
             let date = new Date();
 
