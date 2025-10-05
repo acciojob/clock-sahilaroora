@@ -1,40 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Simple Date & Time</title>
+  <meta charset="UTF-8">
+  <title>Live Timer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 1.5em;
+      text-align: center;
+      padding-top: 50px;
+    }
+    #timer {
+      color: #333;
+    }
+  </style>
 </head>
 <body>
-  <h2>Current Date and Time:</h2>
-  <p id="datetime"></p>
+
+  <!-- Timer Display -->
+  <p id="timer">Loading time...</p>
 
   <script>
-    function updateDateTime() {
+    function updateTimer() {
+      const timerElement = document.getElementById("timer");
+
       const now = new Date();
+      const formattedTime = now.toLocaleString(); // e.g. "10/5/2025, 3:24:15 PM"
 
-      // Format date as MM/DD/YYYY
-      const month = now.getMonth() + 1; // getMonth() is zero-based
-      const day = now.getDate();
-      const year = now.getFullYear();
-
-      // Format time in 12-hour format with leading zeros
-      let hours = now.getHours();
-      const minutes = now.getMinutes();
-      const seconds = now.getSeconds();
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      hours = hours % 12 || 12;
-
-      const pad = (num) => (num < 10 ? '0' + num : num);
-
-      const formattedDate = `${pad(month)}/${pad(day)}/${year}`;
-      const formattedTime = `${pad(hours)}:${pad(minutes)}:${pad(seconds)} ${ampm}`;
-
-      document.getElementById('datetime').innerText = `${formattedDate}, ${formattedTime}`;
+      timerElement.textContent = formattedTime;
     }
 
-    setInterval(updateDateTime, 1000);
-    updateDateTime(); // initial call to show time immediately
+    // Initial call to show time right away
+    updateTimer();
+
+    // Update every 1000ms (1 second)
+    setInterval(updateTimer, 1000);
   </script>
+
 </body>
 </html>
+
 
